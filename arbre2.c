@@ -1,4 +1,3 @@
-
 #include<stdlib.h>
 #include<stdio.h>
 #include<time.h>
@@ -140,7 +139,15 @@ void supp(arbre *a,arbre pere,int val){
 }
 int main(){
     
+    // adding the color palette of the project 
+    int colorPurple = 0x53405EFF;
+    int colorRed = 0x90314FFF;
+    int colorOrange = 0xDD704FFF;
+    int colorYellow = 0xF6D0A1FF;
+    int colorBlue = 0x5B8090FF;
     
+    
+
     Rectangle rec1={50,50,120,50};
     Rectangle rec2={50,150,120,50};
     Rectangle rec3={10,350,50,50};
@@ -156,6 +163,7 @@ int main(){
     //les boutons du 1er ecran 
     //Rectangle voirArbreRec = {50,50,120,50};
     Rectangle sortirRec = {600,264,120,50};
+    
     Rectangle revenirRec = {1280,0,120,50};
    //Button voirArbreBtn = initbutton(voirArbreRec,"Voir arbre",LIGHTGRAY);
     Button sortirBtn = initbutton(sortirRec,"sortir",LIGHTGRAY);
@@ -177,6 +185,7 @@ int main(){
         }   */
                     BeginDrawing();
                     ClearBackground(RAYWHITE);
+                    GuiSetStyle(BUTTON, BORDER_COLOR_NORMAL, colorRed);
                     switch(ecranActuel){
                         case ECRAN_UN: 
                             if (GuiButton(arbreRec, "Arbre N-aire")) {
