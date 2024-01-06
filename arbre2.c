@@ -1,10 +1,11 @@
-#include<raylib.h>
+
 #include<stdlib.h>
 #include<stdio.h>
 #include<time.h>
-#include "raygui.h"
+#include "include/raylib.h"
+#include "include/raygui.h"
 #define RAYGUI_IMPLEMENTATION
-#include "raygui.h"
+#include "include/raygui.h"
 #undef RAYGUI_IMPLEMENTATION
 typedef enum Ecran { ECRAN_UN, ECRAN_DEUX } Ecran;
 typedef struct Button Button;
@@ -154,7 +155,7 @@ int main(){
     Button ok=initbutton(rec5,"OK",GREEN);
     //les boutons du 1er ecran 
     //Rectangle voirArbreRec = {50,50,120,50};
-    Rectangle sortirRec = {10,40,120,50};
+    Rectangle sortirRec = {600,264,120,50};
     Rectangle revenirRec = {1280,0,120,50};
    //Button voirArbreBtn = initbutton(voirArbreRec,"Voir arbre",LIGHTGRAY);
     Button sortirBtn = initbutton(sortirRec,"sortir",LIGHTGRAY);
@@ -167,7 +168,7 @@ int main(){
     InitWindow(1400,500,"arbre");
     //initaliser l'application sur le premier ecran 
     Ecran ecranActuel = ECRAN_UN;
-    Rectangle arbreRec = { 10, 10, 120, 30 };
+    Rectangle arbreRec = { 600, 200, 120, 50 };
    
     SetTargetFPS(60);
     while(!WindowShouldClose()){
@@ -178,12 +179,12 @@ int main(){
                     ClearBackground(RAYWHITE);
                     switch(ecranActuel){
                         case ECRAN_UN: 
-                            if (GuiButton(arbreRec, "Voir arbre")) {
+                            if (GuiButton(arbreRec, "Arbre N-aire")) {
                              ecranActuel = (ecranActuel == ECRAN_UN) ? ECRAN_DEUX : ECRAN_UN;
                                                                     }   
-                             drawButton(sortirBtn);
+                            
                              // close the app 
-                             if(buttonpressed(sortirBtn)){
+                             if( GuiButton(sortirRec,"sortir")){
                                 CloseWindow();
                              }
                             break;
