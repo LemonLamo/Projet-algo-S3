@@ -139,6 +139,8 @@ void supp(arbre *a,arbre pere,int val){
 }
 int main(){
     
+    //adding blend mode for alpha values 
+    BlendMode currentBlendMode = BLEND_ALPHA;
     // adding the color palette of the project 
     int colorPurple = 0x53405EFF;
     int colorRed = 0x90314FFF;
@@ -146,6 +148,8 @@ int main(){
     int colorYellow = 0xF6D0A1FF;
     int colorBlue = 0x5B8090FF;
     
+    //adding background color 
+    Color backgroundColor = { 230,217,241, 1 };
     
 
     Rectangle rec1={50,50,120,50};
@@ -184,7 +188,9 @@ int main(){
             ecranActuel = (ecranActuel == ECRAN_UN) ? ECRAN_DEUX : ECRAN_UN;
         }   */
                     BeginDrawing();
-                    ClearBackground(RAYWHITE);
+                    ClearBackground(backgroundColor);
+                    currentBlendMode = BLEND_ALPHA;
+                    BeginBlendMode(currentBlendMode);
                     GuiSetStyle(BUTTON, BORDER_COLOR_NORMAL, colorRed);
                     switch(ecranActuel){
                         case ECRAN_UN: 
@@ -255,7 +261,7 @@ int main(){
                     }
                     break;
                     }
-                    
+                    EndBlendMode();
                     EndDrawing();   
         
               
