@@ -147,7 +147,7 @@ int main(){
     int colorOrange = 0xDD704FFF;
     int colorYellow = 0xF6D0A1FF;
     int colorBlue = 0x5B8090FF;
-    
+    int textColorWhite = 0xF5F5F5FF;
     //adding background color 
     Color backgroundColor = { 230,217,241, 1 };
     
@@ -192,6 +192,8 @@ int main(){
                     currentBlendMode = BLEND_ALPHA;
                     BeginBlendMode(currentBlendMode);
                     GuiSetStyle(BUTTON, BORDER_COLOR_NORMAL, colorRed);
+                    GuiSetStyle(BUTTON, TEXT_COLOR_NORMAL, textColorWhite);
+                    GuiSetStyle(BUTTON, BASE_COLOR_NORMAL, colorOrange);
                     switch(ecranActuel){
                         case ECRAN_UN: 
                             if (GuiButton(arbreRec, "Arbre N-aire")) {
