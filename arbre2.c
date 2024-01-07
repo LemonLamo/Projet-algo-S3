@@ -204,17 +204,17 @@ int main(){
 
             ClearBackground(RAYWHITE);
 
-            DrawRectangle(600, 250, 200, 100, GRAY);
-            DrawText("Are you sure you want to exit?", 605, 210, 20, BLACK);
+            DrawRectangle(500, 200, 364, 200, GRAY);
+            DrawText("Are you sure you want to exit?", 520, 264, 20, BLACK);
 
             // Draw Yes button
-            if (GuiButton((Rectangle){ 620, 300, 60, 30 }, "Yes"))
+            if (GuiButton((Rectangle){ 536, 292, 100, 50 }, "Yes"))
             {
                 exitWindow = true;
             }
 
             // Draw No button
-            if (GuiButton((Rectangle){ 620, 340, 60, 30 }, "No"))
+            if (GuiButton((Rectangle){ 732, 292, 100, 50 }, "No"))
             {
                 popupActive = false;
             }
