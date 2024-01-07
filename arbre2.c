@@ -1,10 +1,10 @@
 #include<stdlib.h>
 #include<stdio.h>
 #include<time.h>
-#include "include/raylib.h"
-#include "include/raygui.h"
+#include "raylib.h"
+#include "raygui.h"
 #define RAYGUI_IMPLEMENTATION
-#include "include/raygui.h"
+#include "raygui.h"
 #undef RAYGUI_IMPLEMENTATION
 typedef enum Ecran { ECRAN_UN, ECRAN_DEUX } Ecran;
 typedef struct Button Button;
@@ -137,6 +137,28 @@ void supp(arbre *a,arbre pere,int val){
         }
     }
 }
+void minimum(arbre a,int *min){
+    if(a!=NULL){
+        if(a->info<*min)
+            *min=a->info;
+        if(a->n!=0){
+           for(int i=0;i<a->n;i++){
+             minimum(a->A[i],min);
+            }
+            }  
+        }
+    }
+void maximum(arbre a,int *max){
+    if(a!=NULL){
+        if(a->info>*max)
+            *max=a->info;
+        if(a->n!=0){
+           for(int i=0;i<a->n;i++){
+             maximum(a->A[i],max);
+            }
+            }  
+        }
+   }
 int main(){
     //arrow for revenir button 
     
@@ -153,16 +175,21 @@ int main(){
     Color backgroundColor = { 230,217,241, 1 };
     // text size for buttons 
     int textSize = 36;
-
-    Rectangle rec1={50,50,120,50};
-    Rectangle rec2={50,150,120,50};
+    int min1;
+    int max2;
+    Rectangle rec1={50,10,135,50};
+    Rectangle rec2={50,70,135,50};
     Rectangle rec3={10,350,50,50};
     Rectangle rec4={110,350,50,50};
     Rectangle rec5={55,420,50,50};
-    Rectangle rec6={50,250,135,50};
+    Rectangle rec6={50,130,135,50};
+    Rectangle rec7={50,200,50,50};
+    Rectangle rec8={50,270,50,50};
     Button CR=initbutton(rec1,"Creation",RED);
     Button re=initbutton(rec2,"Recherche",RED);
     Button sup=initbutton(rec6,"Suppression",RED);
+    Button min=initbutton(rec7,"min",ORANGE);
+    Button max=initbutton(rec8,"max",ORANGE);
     Button left=initbutton(rec3,"<",GREEN);
     Button right=initbutton(rec4,">",GREEN);
     Button ok=initbutton(rec5,"OK",GREEN);
@@ -175,9 +202,8 @@ int main(){
     Button sortirBtn = initbutton(sortirRec,"sortir",LIGHTGRAY);
     Button revenirBtn = initbutton(revenirRec,"revenir",LIGHTGRAY);
     srand(time(NULL));
-    bool state[4]={false,false,false,false};
+    bool state[5]={false,false,false,false,false};
      arbre a=creat();
-     int pos=0;
      int value=0;
     InitWindow(1400,500,"arbre");
     //initaliser l'application sur le premier ecran 
@@ -245,6 +271,8 @@ int main(){
                         case ECRAN_DEUX: 
                                 drawButton(CR);
                                 drawButton(re);
+                                drawButton(min);
+                                drawButton(max);
                                 //drawButton(sup);
                                 //drawButton(revenirBtn);
                     if(GuiButton(revenirRec,"revenir")){
@@ -254,12 +282,14 @@ int main(){
                     if(buttonpressed(CR) ||state[0] ){
                         if(buttonpressed(CR)){
                             max1=0;
+                            state[3]=false;
+                            state[4]=false;
                             a=creat();
                             CR.col=BLUE;
                             re.col=RED;
                             sup.col=RED;
                         }
-                    drawarbre(a,700,50);
+                    drawarbre(a,750,50);
                     state[0]=true;
                     }
                     if(state[1]||state[2]){
@@ -297,6 +327,18 @@ int main(){
                         state[1]=false;
                         if(buttonpressed(ok)&&state[2])
                             supp(&a,NULL,value);
+                    }
+                    if(buttonpressed(min)||state[3]){
+                        state[3]=true;
+                        min1=100;
+                        minimum(a,&min1);
+                        DrawText(TextFormat("%d",min1),110,205,40,BLACK);
+                    }
+                    if(buttonpressed(max)||state[4]){
+                        state[4]=true;
+                        max2=-1;
+                        maximum(a,&max2);
+                        DrawText(TextFormat("%d",max2),110,275,40,BLACK);
                     }
                     break;
                     }
