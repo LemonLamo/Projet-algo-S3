@@ -150,7 +150,8 @@ int main(){
     int textColorWhite = 0xF5F5F5FF;
     //adding background color 
     Color backgroundColor = { 230,217,241, 1 };
-    
+    // text size for buttons 
+    int textSize = 36;
 
     Rectangle rec1={50,50,120,50};
     Rectangle rec2={50,150,120,50};
@@ -181,19 +182,54 @@ int main(){
     //initaliser l'application sur le premier ecran 
     Ecran ecranActuel = ECRAN_UN;
     Rectangle arbreRec = { 600, 200, 120, 50 };
-   
+
+
+    //pop-up logic 
+    bool exitWindow = false;
+    bool popupActive = false;
+  
     SetTargetFPS(60);
-    while(!WindowShouldClose()){
+    while(!exitWindow){
            /* if (GuiButton(arbreRec, "Voir arbre")) {
             ecranActuel = (ecranActuel == ECRAN_UN) ? ECRAN_DEUX : ECRAN_UN;
         }   */
-                    BeginDrawing();
+        if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE))
+        {
+            popupActive = true;
+        }
+        if (popupActive)
+        {
+            // Draw the popup
+            BeginDrawing();
+
+            ClearBackground(RAYWHITE);
+
+            DrawRectangle(600, 250, 200, 100, GRAY);
+            DrawText("Are you sure you want to exit?", 605, 210, 20, BLACK);
+
+            // Draw Yes button
+            if (GuiButton((Rectangle){ 620, 300, 60, 30 }, "Yes"))
+            {
+                exitWindow = true;
+            }
+
+            // Draw No button
+            if (GuiButton((Rectangle){ 620, 340, 60, 30 }, "No"))
+            {
+                popupActive = false;
+            }
+
+            EndDrawing();
+        }else{
+         BeginDrawing();
                     ClearBackground(backgroundColor);
                     currentBlendMode = BLEND_ALPHA;
                     BeginBlendMode(currentBlendMode);
+                    
                     GuiSetStyle(BUTTON, BORDER_COLOR_NORMAL, colorRed);
                     GuiSetStyle(BUTTON, TEXT_COLOR_NORMAL, textColorWhite);
                     GuiSetStyle(BUTTON, BASE_COLOR_NORMAL, colorOrange);
+                    GuiSetStyle(BUTTON, TEXT_SIZE, textSize);
                     switch(ecranActuel){
                         case ECRAN_UN: 
                             if (GuiButton(arbreRec, "Arbre N-aire")) {
@@ -263,9 +299,14 @@ int main(){
                     }
                     break;
                     }
+                   
                     EndBlendMode();
-                    EndDrawing();   
+                    
+                    EndDrawing();       
+        }
+                       
         
               
     }
 }
+        
