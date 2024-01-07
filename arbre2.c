@@ -138,6 +138,7 @@ void supp(arbre *a,arbre pere,int val){
     }
 }
 int main(){
+    //arrow for revenir button 
     
     //adding blend mode for alpha values 
     BlendMode currentBlendMode = BLEND_ALPHA;
@@ -244,9 +245,9 @@ int main(){
                         case ECRAN_DEUX: 
                                 drawButton(CR);
                                 drawButton(re);
-                                drawButton(sup);
-                                drawButton(revenirBtn);
-                    if(buttonpressed(revenirBtn)){
+                                //drawButton(sup);
+                                //drawButton(revenirBtn);
+                    if(GuiButton(revenirRec,"revenir")){
                         ecranActuel = ECRAN_UN;
                     }
                     
@@ -286,8 +287,8 @@ int main(){
                         
                         
                     }
-                    if(buttonpressed(sup) ||state[2]){
-                        if(buttonpressed(sup)){
+                    if(GuiButton(rec6,"suppression") ||state[2]){
+                        if(GuiButton(rec6,"suppression")){
                          CR.col=RED;
                          re.col=RED;
                          sup.col=BLUE;   

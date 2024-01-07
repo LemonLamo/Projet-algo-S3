@@ -59,6 +59,7 @@
   "files.associations": {
     "*.embeddedhtml": "html",
     "time.h": "c",
-    "raylib.h": "c"
+    "raylib.h": "c",
+    "raygui.h": "c"
   }
 }
