@@ -263,8 +263,7 @@ int main(){
         }else{
          BeginDrawing();
                     ClearBackground(backgroundColor);
-                    currentBlendMode = BLEND_ALPHA;
-                    BeginBlendMode(currentBlendMode);
+                    
                     
                     GuiSetStyle(BUTTON, BORDER_COLOR_NORMAL, colorRed);
                     GuiSetStyle(BUTTON, TEXT_COLOR_NORMAL, textColorWhite);
@@ -384,8 +383,8 @@ int main(){
                     break;
                     }
                    
-                    EndBlendMode();
-                    free(a);
+                    
+                    //free(a);
                     EndDrawing();       
         }
                        
