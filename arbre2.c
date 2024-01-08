@@ -185,6 +185,8 @@ int main(){
     Rectangle rec3={10,350,50,50};
     Rectangle rec4={110,350,50,50};
     Rectangle rec5={55,420,50,50};
+    // for search 
+    Rectangle recSearch = {55,350,50,50};
     Rectangle rec6={50,130,135,50};
     Rectangle rec7={50,200,50,50};
     Rectangle rec8={50,270,50,50};
@@ -217,7 +219,15 @@ int main(){
     //pop-up logic 
     bool exitWindow = false;
     bool popupActive = false;
-  
+
+    //for search input 
+    char numStrSearch[32] = "\0";
+    int numberSearch = 0;
+    // for delete input 
+    char numStrDelete[32] = "\0";
+    int numberDelete = 0;
+    GuiSetStyle(DEFAULT, TEXT_SIZE, 18); // Set global style default font size
+    //GuiSetStyle(TEXTBOX, TEXT_SIZE, 20); // Set specific control property
     SetTargetFPS(60);
     while(!exitWindow){
            /* if (GuiButton(arbreRec, "Voir arbre")) {
@@ -300,15 +310,15 @@ int main(){
                     state[0]=true;
                     }
                     if(state[1]||state[2]){
-                        drawButton(left);
-                        drawButton(right);
+                        //drawButton(left);
+                        //drawButton(right);
                         drawButton(ok);
                         
-                        DrawText(TextFormat("%d",value),70,360,30,BLACK);
-                        if(buttonpressed(right))
+                        //DrawText(TextFormat("%d",value),70,360,30,BLACK);
+                        /* if(buttonpressed(right))
                             value++;
                         if(buttonpressed(left))
-                            value--;
+                            value--;*/
                     }
                      GuiSetStyle(BUTTON, TEXT_COLOR_NORMAL, textColorWhite);
                     GuiSetStyle(BUTTON, BORDER_COLOR_NORMAL, 0x000000AA);
@@ -322,8 +332,11 @@ int main(){
                         }
                         state[1]=true;
                         state[2]=false;
+                        GuiLabel((Rectangle){15,315,300,50},"Entrez une valeur a rechercher");
+                        GuiTextBox(recSearch,numStrSearch,32,true);
                         if(buttonpressed(ok)&&state[1] ){ 
-                        Recherche(a,value);
+                            numberSearch = atoi(numStrSearch);
+                            Recherche(a,numberSearch);
                         }
                         
                         
@@ -340,8 +353,13 @@ int main(){
                         }
                         state[2]=true;
                         state[1]=false;
-                        if(buttonpressed(ok)&&state[2])
-                            supp(&a,NULL,value);
+                        GuiLabel((Rectangle){15,315,300,50},"Entrez une valeur a supprimer");
+                        GuiTextBox(recSearch,numStrDelete,32,true);
+                        if(buttonpressed(ok)&&state[2]){
+                            numberDelete = atoi(numStrDelete);
+                            supp(&a,NULL,numberDelete);
+                        }
+                            
                     }
                     GuiSetStyle(BUTTON, TEXT_COLOR_NORMAL, textColorWhite);
                     GuiSetStyle(BUTTON, BASE_COLOR_NORMAL, colorBlue);
