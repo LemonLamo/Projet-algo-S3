@@ -385,7 +385,7 @@ int main(){
                     }
                    
                     EndBlendMode();
-                    
+                    free(a);
                     EndDrawing();       
         }
                        
