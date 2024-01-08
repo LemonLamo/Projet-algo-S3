@@ -228,6 +228,12 @@ int main(){
     int numberDelete = 0;
     GuiSetStyle(DEFAULT, TEXT_SIZE, 18); // Set global style default font size
     //GuiSetStyle(TEXTBOX, TEXT_SIZE, 20); // Set specific control property
+
+    Font font = GetFontDefault(); // Get the default font
+    Vector2 position = {10, 10}; // Position for the text
+    float fontSize = 20.0; // Font size
+    float spacing = 1.0; // Spacing for the text
+    Color color = BLACK; // Color of the text
     SetTargetFPS(60);
     while(!exitWindow){
            /* if (GuiButton(arbreRec, "Voir arbre")) {
@@ -278,6 +284,12 @@ int main(){
                         GuiSetStyle(DEFAULT, TEXT_SIZE, 22);
                         GuiLabel(hintRec,"Cliquez sur Arbre N-aire pour en manipuler un");
                         GuiSetStyle(DEFAULT, TEXT_SIZE, 18);
+                        DrawText("Projet fait par :", 1200, 350, 20, GetColor(colorPetrol));
+
+                        DrawText("- Lamia Koucem", 1200, 380, 20, GetColor(colorPurple));
+                        DrawText("- Amine Selatna", 1200, 410, 20, GetColor(colorPurple));
+                        DrawText("- Wail Mansour", 1200, 440, 20, GetColor(colorPurple));
+
                             if (GuiButton(arbreRec, "Arbre N-aire")) {
                              ecranActuel = (ecranActuel == ECRAN_UN) ? ECRAN_DEUX : ECRAN_UN;
                                                                     }   
