@@ -171,6 +171,9 @@ int main(){
     int colorYellow = 0xF6D0A1FF;
     int colorBlue = 0x5B8090FF;
     int textColorWhite = 0xF5F5F5FF;
+    int colorEcarlate = 0xE71A3AFF;
+    int colorJade = 0x009E69FF;
+    int colorPetrol = 0x060173FF;
     //adding background color 
     Color backgroundColor = { 230,217,241, 1 };
     // text size for buttons 
@@ -232,16 +235,16 @@ int main(){
             ClearBackground(RAYWHITE);
 
             DrawRectangle(500, 200, 364, 200, GRAY);
-            DrawText("Are you sure you want to exit?", 520, 264, 20, BLACK);
+            DrawText("Etes-vous sûr de vouloir quitter?", 520, 264, 20, BLACK);
 
             // Draw Yes button
-            if (GuiButton((Rectangle){ 536, 292, 100, 50 }, "Yes"))
+            if (GuiButton((Rectangle){ 536, 292, 100, 50 }, "Oui"))
             {
                 exitWindow = true;
             }
 
             // Draw No button
-            if (GuiButton((Rectangle){ 732, 292, 100, 50 }, "No"))
+            if (GuiButton((Rectangle){ 732, 292, 100, 50 }, "Non"))
             {
                 popupActive = false;
             }
@@ -256,7 +259,7 @@ int main(){
                     GuiSetStyle(BUTTON, BORDER_COLOR_NORMAL, colorRed);
                     GuiSetStyle(BUTTON, TEXT_COLOR_NORMAL, textColorWhite);
                     GuiSetStyle(BUTTON, BASE_COLOR_NORMAL, colorOrange);
-                    GuiSetStyle(BUTTON, TEXT_SIZE, textSize);
+                    GuiSetStyle(BUTTON, TEXT_SIZE, 25);
                     switch(ecranActuel){
                         case ECRAN_UN: 
                             if (GuiButton(arbreRec, "Arbre N-aire")) {
@@ -269,18 +272,22 @@ int main(){
                              }
                             break;
                         case ECRAN_DEUX: 
-                                drawButton(CR);
-                                drawButton(re);
-                                drawButton(min);
-                                drawButton(max);
+                                //drawButton(CR);
+                                //drawButton(re);
+
+                                //drawButton(min);
+                                //drawButton(max);
                                 //drawButton(sup);
                                 //drawButton(revenirBtn);
                     if(GuiButton(revenirRec,"revenir")){
                         ecranActuel = ECRAN_UN;
                     }
-                    
-                    if(buttonpressed(CR) ||state[0] ){
-                        if(buttonpressed(CR)){
+                    GuiSetStyle(BUTTON, TEXT_COLOR_NORMAL, textColorWhite);
+                    GuiSetStyle(BUTTON, BORDER_COLOR_NORMAL, 0x000000AA);
+                    GuiSetStyle(BUTTON, BASE_COLOR_NORMAL, colorJade);
+                    GuiSetStyle(BUTTON, TEXT_SIZE, 25);
+                    if(GuiButton(rec1,"Création") ||state[0] ){
+                        if(GuiButton(rec1,"Création")){
                             max1=0;
                             state[3]=false;
                             state[4]=false;
@@ -303,8 +310,12 @@ int main(){
                         if(buttonpressed(left))
                             value--;
                     }
-                    if(buttonpressed(re) ||state[1]){
-                        if(buttonpressed(re)){
+                     GuiSetStyle(BUTTON, TEXT_COLOR_NORMAL, textColorWhite);
+                    GuiSetStyle(BUTTON, BORDER_COLOR_NORMAL, 0x000000AA);
+                    GuiSetStyle(BUTTON, BASE_COLOR_NORMAL, colorPetrol);
+                    GuiSetStyle(BUTTON, TEXT_SIZE, 25);
+                    if(GuiButton(rec2,"Recherche") ||state[1]){
+                        if(GuiButton(rec2,"Recherche")){
                           CR.col=RED;
                           re.col=BLUE;
                           sup.col=RED;  
@@ -317,6 +328,10 @@ int main(){
                         
                         
                     }
+                    GuiSetStyle(BUTTON, TEXT_COLOR_NORMAL, textColorWhite);
+                    GuiSetStyle(BUTTON, BORDER_COLOR_NORMAL, 0x000000AA);
+                    GuiSetStyle(BUTTON, BASE_COLOR_NORMAL, colorEcarlate);
+                    GuiSetStyle(BUTTON, TEXT_SIZE, 25);
                     if(GuiButton(rec6,"suppression") ||state[2]){
                         if(GuiButton(rec6,"suppression")){
                          CR.col=RED;
@@ -328,18 +343,26 @@ int main(){
                         if(buttonpressed(ok)&&state[2])
                             supp(&a,NULL,value);
                     }
-                    if(buttonpressed(min)||state[3]){
+                    GuiSetStyle(BUTTON, TEXT_COLOR_NORMAL, textColorWhite);
+                    GuiSetStyle(BUTTON, BASE_COLOR_NORMAL, colorBlue);
+                    GuiSetStyle(BUTTON, BORDER_COLOR_NORMAL, 0x000000AA);
+                    if(GuiButton(rec7,"Min")||state[3]){
                         state[3]=true;
                         min1=100;
                         minimum(a,&min1);
                         DrawText(TextFormat("%d",min1),110,205,40,BLACK);
                     }
-                    if(buttonpressed(max)||state[4]){
+                    GuiSetStyle(BUTTON, TEXT_COLOR_NORMAL, textColorWhite);
+                    GuiSetStyle(BUTTON, BASE_COLOR_NORMAL, colorRed);
+                    GuiSetStyle(BUTTON, BORDER_COLOR_NORMAL, 0x000000AA);
+                    if(GuiButton(rec8,"Max")||state[4]){
                         state[4]=true;
                         max2=-1;
                         maximum(a,&max2);
                         DrawText(TextFormat("%d",max2),110,275,40,BLACK);
                     }
+                    GuiSetStyle(BUTTON, TEXT_COLOR_NORMAL, textColorWhite);
+                    GuiSetStyle(BUTTON, BASE_COLOR_NORMAL, colorOrange);
                     break;
                     }
                    
