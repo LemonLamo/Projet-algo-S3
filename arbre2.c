@@ -214,8 +214,8 @@ int main(){
     //initaliser l'application sur le premier ecran 
     Ecran ecranActuel = ECRAN_UN;
     Rectangle arbreRec = { 600, 200, 120, 50 };
-
-
+    Rectangle welcomeRec = { 400, 50, 500, 50 };
+    Rectangle hintRec = { 264, 114, 800, 50 };
     //pop-up logic 
     bool exitWindow = false;
     bool popupActive = false;
@@ -271,6 +271,13 @@ int main(){
                     GuiSetStyle(BUTTON, TEXT_SIZE, 25);
                     switch(ecranActuel){
                         case ECRAN_UN: 
+                        GuiSetStyle(DEFAULT, TEXT_SIZE, 25);
+                        GuiSetStyle(LABEL, TEXT_COLOR_NORMAL, colorBlue);
+                        GuiSetStyle(LABEL, TEXT_ALIGNMENT, TEXT_ALIGN_CENTER);
+                        GuiLabel(welcomeRec,"Bienvenue sur notre Projet !");
+                        GuiSetStyle(DEFAULT, TEXT_SIZE, 22);
+                        GuiLabel(hintRec,"Cliquez sur Arbre N-aire pour en manipuler un");
+                        GuiSetStyle(DEFAULT, TEXT_SIZE, 18);
                             if (GuiButton(arbreRec, "Arbre N-aire")) {
                              ecranActuel = (ecranActuel == ECRAN_UN) ? ECRAN_DEUX : ECRAN_UN;
                                                                     }   
