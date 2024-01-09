@@ -43,7 +43,7 @@ struct noued{
 typedef noued * arbre;
 int max1=0;
 arbre creat(){
-    int n=randomvlue(0,4);
+    int n=randomvlue(1,4);
     int x=randomvlue(1,50);
     arbre a;
     max1++;
@@ -71,17 +71,24 @@ void drawarbre(arbre a,int posx,int posy){
         n=a->n;
         DrawCircle(posx,posy,20,a->col);
         DrawText(TextFormat("%d",a->info),posx-15,posy-10,25,BLACK);
+        
        for(i=0;i<n;i++){
         if(a->A[i]!=NULL){
         if(i<=n/2){
+            
             DrawLine(posx,posy+20,posx-100*(n/2-i),posy+100,BLACK);
+             Sleep(1);
             drawarbre(a->A[i],posx-100*(n/2-i),posy+100);
        }else{
+           
            DrawLine(posx,posy+20,posx+(i-n/2)*100,posy+100,BLACK);
+            Sleep(1);
            drawarbre(a->A[i],posx+(i-n/2)*100,posy+100);
     
        }
         }
+       
+        
     }
    }
 }
