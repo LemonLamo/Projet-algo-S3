@@ -44,7 +44,7 @@ typedef noued * arbre;
 int max1=0;
 arbre creat(){
     int n=randomvlue(1,4);
-    int x=randomvlue(1,50);
+    int x=randomvlue(-100,100);
     arbre a;
     max1++;
     a=malloc(sizeof(noued));
@@ -69,7 +69,7 @@ void drawarbre(arbre a,int posx,int posy){
     if(a!=NULL){
         int n;
         n=a->n;
-        DrawCircle(posx,posy,20,a->col);
+        DrawCircle(posx,posy,25,a->col);
         DrawText(TextFormat("%d",a->info),posx-15,posy-10,25,BLACK);
         
        for(i=0;i<n;i++){
@@ -166,6 +166,7 @@ void maximum(arbre a,int *max){
             }  
         }
    }
+
 int main(){
     //arrow for revenir button 
     
@@ -400,7 +401,7 @@ int main(){
                     GuiSetStyle(BUTTON, BORDER_COLOR_NORMAL, 0x000000AA);
                     if(GuiButton(rec8,"Max")||state[4]){
                         state[4]=true;
-                        max2=-1;
+                        max2=-100;
                         maximum(a,&max2);
                         DrawText(TextFormat("%d",max2),110,275,40,BLACK);
                     }
