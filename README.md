@@ -22,7 +22,7 @@ Nous avons utilisé Raylib pour définir l'aspect graphique de l'arbre et Raygui
 
 ## Démonstration 
 Vous pouvez exécuter project.exe pour voir la dernière version du projet
-### Ecran 1 : 
+### Écran 1 : 
 L'écran 1 contient : 
 - Un bouton pour accéder au l'interface de visualisation et un autre pour sortir de l'application.
   
@@ -32,7 +32,7 @@ L'écran 1 contient :
 
 ![image](https://github.com/LemonLamo/Projet-algo-S3/assets/94323231/a2c4b74f-2751-4ed4-bab5-2b5f4bf958ae)
 
-### Ecran 2 : 
+### Écran 2 : 
 L'écran 2 contient les options suivantes : 
 
 #### 1) Création 
@@ -53,7 +53,7 @@ Le bouton suppression, permet de supprimer un nœud de l'arbre et de le mettre a
 
 #### 4) Min & Max 
 
-Les boutons Min et Max permettent d'afficher la valeur minimale et maximale de l'arbre n-aire respectivement. 
+Les boutons Min et Max permettent d'afficher la valeur minimale et maximale de l'arbre N-aire respectivement. 
 
 #### 5) Trier 
 
