@@ -275,7 +275,7 @@ int main(){
     srand(time(NULL));
     bool state[5]={false,false,false,false,false};
      arbre a=creat();   
-    InitWindow(1400,500,"arbre");
+    InitWindow(1400,500,"Projet ALGO3");
     //initaliser l'application sur le premier ecran 
     Ecran ecranActuel = ECRAN_UN;
     Rectangle arbreRec = { 600, 200, 120, 50 };
