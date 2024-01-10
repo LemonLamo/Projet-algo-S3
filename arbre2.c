@@ -166,10 +166,82 @@ void maximum(arbre a,int *max){
             }  
         }
    }
+//int index = 0;
+int getSize(arbre root) {
+    if (root == NULL) return 0;
 
+    int size = 1; // Count the root
+
+    for (int i = 0; i < root->n; i++) {
+        size += getSize(root->A[i]); // Recursively count the size of subtrees
+    }
+
+    return size;
+}
+int compare(const void* a, const void* b) {
+    int int_a = *((int*)a);
+    int int_b = *((int*)b);
+    return (int_a > int_b) - (int_a < int_b);
+}
+int compareDesc(const void* a, const void* b) {
+    int int_a = *((int*)a);
+    int int_b = *((int*)b);
+    return (int_b > int_a) - (int_b < int_a);
+}
+void storeNodes(arbre root, int* array, int* index) {
+    if (root == NULL) return;
+
+    for (int i = 0; i < root->n; i++) {
+        storeNodes(root->A[i], array, index);
+    }
+
+    array[(*index)++] = root->info;
+}
+void putNodesBack(arbre root, int* array, int* index) {
+    if (root == NULL) return;
+
+    for (int i = 0; i < root->n; i++) {
+        putNodesBack(root->A[i], array, index);
+    }
+
+    root->info = array[(*index)++];
+}
+void sortArrayDesc(int* array, int size) {
+    qsort(array, size, sizeof(int), compareDesc);
+}
+void sortTree(arbre root) {
+    int size = getSize(root);
+    int* array = malloc(size * sizeof(int));
+    int index = 0;
+
+    storeNodes(root, array, &index);
+
+    qsort(array, size, sizeof(int), compare);
+
+    index = 0;
+    putNodesBack(root, array, &index);
+
+    free(array);
+}
+void sortTreeDesc(arbre root) {
+    int size = getSize(root);
+    int* array = malloc(size * sizeof(int));
+    int index = 0;
+
+    storeNodes(root, array, &index);
+
+    sortArrayDesc(array, size);
+
+    index = 0;
+    putNodesBack(root, array, &index);
+
+    free(array);
+}
 int main(){
-    //arrow for revenir button 
-    
+    // Dropdown box items
+    const char *items = "1-ASC;2-DSC"; 
+    int activeItem = 0;
+    int  selectedItem = -1;
     //adding blend mode for alpha values 
     BlendMode currentBlendMode = BLEND_ALPHA;
     // adding the color palette of the project 
@@ -322,6 +394,21 @@ int main(){
                     GuiSetStyle(BUTTON, BORDER_COLOR_NORMAL, 0x000000AA);
                     GuiSetStyle(BUTTON, BASE_COLOR_NORMAL, colorJade);
                     GuiSetStyle(BUTTON, TEXT_SIZE, 25);
+                    GuiDrawText("1-ASC : Trier les noeuds du plus petit au plus grand",(Rectangle){ 950, 100, 450, 40 },TEXT_ALIGN_LEFT, BLACK);
+                    GuiDrawText("2-DSC : Trier les noeuds du plus grand au plus petit",(Rectangle){ 950, 164, 450, 40 },TEXT_ALIGN_LEFT, BLACK);
+                    GuiComboBox((Rectangle){ 1100, 250, 120, 40 }, items, &activeItem);
+                    
+                    
+                    if (GuiButton((Rectangle){ 1100, 314, 120, 40 }, "Trier")) {
+                            if(activeItem == 1){
+                                    sortTree(a);
+                                    drawarbre(a,750,50);
+                                }else{
+                                    sortTreeDesc(a);
+                                    
+                                    drawarbre(a,750,50);
+                                }
+                    }
                     if(GuiButton(rec1,"Création") ||state[0] ){
                         if(GuiButton(rec1,"Création")){
                             max1=0;
@@ -395,6 +482,8 @@ int main(){
                         min1=100;
                         minimum(a,&min1);
                         DrawText(TextFormat("%d",min1),110,205,40,BLACK);
+                        sortTree(a);
+                        drawarbre(a,750,50);
                     }
                     GuiSetStyle(BUTTON, TEXT_COLOR_NORMAL, textColorWhite);
                     GuiSetStyle(BUTTON, BASE_COLOR_NORMAL, colorRed);
