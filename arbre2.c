@@ -63,7 +63,6 @@ arbre creat(){
   
     return a;
 }
-
 void drawarbre(arbre a,int posx,int posy){
     int i;
     if(a!=NULL){
@@ -77,12 +76,12 @@ void drawarbre(arbre a,int posx,int posy){
         if(i<=n/2){
             
             DrawLine(posx,posy+20,posx-100*(n/2-i),posy+100,BLACK);
-             Sleep(1);
+            
             drawarbre(a->A[i],posx-100*(n/2-i),posy+100);
        }else{
            
            DrawLine(posx,posy+20,posx+(i-n/2)*100,posy+100,BLACK);
-            Sleep(1);
+           
            drawarbre(a->A[i],posx+(i-n/2)*100,posy+100);
     
        }
@@ -166,14 +165,13 @@ void maximum(arbre a,int *max){
             }  
         }
    }
-//int index = 0;
 int getSize(arbre root) {
     if (root == NULL) return 0;
 
-    int size = 1; // Count the root
+    int size = 1; 
 
     for (int i = 0; i < root->n; i++) {
-        size += getSize(root->A[i]); // Recursively count the size of subtrees
+        size += getSize(root->A[i]); // Compter recursivement le nombre de sous-arbres
     }
 
     return size;
@@ -238,17 +236,12 @@ void sortTreeDesc(arbre root) {
     free(array);
 }
 int main(){
-    // Dropdown box items
-    const char *items = "1-ASC;2-DSC"; 
+    const char *items = "1-ASC;2-DSC"; //Options du GuiComboBox
     int activeItem = 0;
-    int  selectedItem = -1;
-    //adding blend mode for alpha values 
-    BlendMode currentBlendMode = BLEND_ALPHA;
-    // adding the color palette of the project 
+    // couleurs
     int colorPurple = 0x53405EFF;
     int colorRed = 0x90314FFF;
     int colorOrange = 0xDD704FFF;
-    int colorYellow = 0xF6D0A1FF;
     int colorBlue = 0x5B8090FF;
     int textColorWhite = 0xF5F5F5FF;
     int colorEcarlate = 0xE71A3AFF;
@@ -256,8 +249,6 @@ int main(){
     int colorPetrol = 0x060173FF;
     //adding background color 
     Color backgroundColor = { 230,217,241, 1 };
-    // text size for buttons 
-    int textSize = 36;
     int min1;
     int max2;
     Rectangle rec1={50,10,135,50};
@@ -279,17 +270,11 @@ int main(){
     Button right=initbutton(rec4,">",GREEN);
     Button ok=initbutton(rec5,"OK",GREEN);
     //les boutons du 1er ecran 
-    //Rectangle voirArbreRec = {50,50,120,50};
-    Rectangle sortirRec = {600,264,120,50};
-    
-    Rectangle revenirRec = {1280,0,120,50};
-   //Button voirArbreBtn = initbutton(voirArbreRec,"Voir arbre",LIGHTGRAY);
-    Button sortirBtn = initbutton(sortirRec,"sortir",LIGHTGRAY);
-    Button revenirBtn = initbutton(revenirRec,"revenir",LIGHTGRAY);
+    Rectangle sortirRec = {600,264,120,50}; 
+    Rectangle revenirRec = {1280,0,120,50}; 
     srand(time(NULL));
     bool state[5]={false,false,false,false,false};
-     arbre a=creat();
-     int value=0;
+     arbre a=creat();   
     InitWindow(1400,500,"arbre");
     //initaliser l'application sur le premier ecran 
     Ecran ecranActuel = ECRAN_UN;
@@ -299,58 +284,44 @@ int main(){
     //pop-up logic 
     bool exitWindow = false;
     bool popupActive = false;
-
     //for search input 
     char numStrSearch[32] = "\0";
     int numberSearch = 0;
     // for delete input 
     char numStrDelete[32] = "\0";
     int numberDelete = 0;
-    GuiSetStyle(DEFAULT, TEXT_SIZE, 18); // Set global style default font size
-    //GuiSetStyle(TEXTBOX, TEXT_SIZE, 20); // Set specific control property
-
-    Font font = GetFontDefault(); // Get the default font
-    Vector2 position = {10, 10}; // Position for the text
-    float fontSize = 20.0; // Font size
-    float spacing = 1.0; // Spacing for the text
-    Color color = BLACK; // Color of the text
+    GuiSetStyle(DEFAULT, TEXT_SIZE, 18); 
     SetTargetFPS(60);
     while(!exitWindow){
-           /* if (GuiButton(arbreRec, "Voir arbre")) {
-            ecranActuel = (ecranActuel == ECRAN_UN) ? ECRAN_DEUX : ECRAN_UN;
-        }   */
+          
         if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE))
         {
             popupActive = true;
         }
         if (popupActive)
-        {
-            // Draw the popup
+        {            
             BeginDrawing();
 
             ClearBackground(RAYWHITE);
 
-            DrawRectangle(500, 200, 364, 200, GRAY);
+            DrawRectangle(500, 200, 400, 200, GRAY);
             DrawText("Etes-vous sûr de vouloir quitter?", 520, 264, 20, BLACK);
 
-            // Draw Yes button
+           GuiSetStyle(BUTTON, BASE_COLOR_NORMAL, colorBlue);
             if (GuiButton((Rectangle){ 536, 292, 100, 50 }, "Oui"))
             {
                 exitWindow = true;
             }
 
-            // Draw No button
+            GuiSetStyle(BUTTON, BASE_COLOR_NORMAL, colorEcarlate);
             if (GuiButton((Rectangle){ 732, 292, 100, 50 }, "Non"))
             {
                 popupActive = false;
             }
-
             EndDrawing();
         }else{
          BeginDrawing();
-                    ClearBackground(backgroundColor);
-                    
-                    
+                    ClearBackground(backgroundColor);                   
                     GuiSetStyle(BUTTON, BORDER_COLOR_NORMAL, colorRed);
                     GuiSetStyle(BUTTON, TEXT_COLOR_NORMAL, textColorWhite);
                     GuiSetStyle(BUTTON, BASE_COLOR_NORMAL, colorOrange);
@@ -374,19 +345,13 @@ int main(){
                              ecranActuel = (ecranActuel == ECRAN_UN) ? ECRAN_DEUX : ECRAN_UN;
                                                                     }   
                             
-                             // close the app 
+                             // fermer l'application
                              if( GuiButton(sortirRec,"sortir")){
                                 CloseWindow();
                              }
                             break;
                         case ECRAN_DEUX: 
-                                //drawButton(CR);
-                                //drawButton(re);
-
-                                //drawButton(min);
-                                //drawButton(max);
-                                //drawButton(sup);
-                                //drawButton(revenirBtn);
+                                
                     if(GuiButton(revenirRec,"revenir")){
                         ecranActuel = ECRAN_UN;
                     }
@@ -423,15 +388,7 @@ int main(){
                     state[0]=true;
                     }
                     if(state[1]||state[2]){
-                        //drawButton(left);
-                        //drawButton(right);
                         drawButton(ok);
-                        
-                        //DrawText(TextFormat("%d",value),70,360,30,BLACK);
-                        /* if(buttonpressed(right))
-                            value++;
-                        if(buttonpressed(left))
-                            value--;*/
                     }
                      GuiSetStyle(BUTTON, TEXT_COLOR_NORMAL, textColorWhite);
                     GuiSetStyle(BUTTON, BORDER_COLOR_NORMAL, 0x000000AA);
@@ -482,8 +439,6 @@ int main(){
                         min1=100;
                         minimum(a,&min1);
                         DrawText(TextFormat("%d",min1),110,205,40,BLACK);
-                        sortTree(a);
-                        drawarbre(a,750,50);
                     }
                     GuiSetStyle(BUTTON, TEXT_COLOR_NORMAL, textColorWhite);
                     GuiSetStyle(BUTTON, BASE_COLOR_NORMAL, colorRed);
@@ -499,8 +454,6 @@ int main(){
                     break;
                     }
                    
-                    
-                    //free(a);
                     EndDrawing();       
         }
                        
